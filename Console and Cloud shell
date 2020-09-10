@@ -1,0 +1,121 @@
+LAB #Console and Cloud Shell
+
+#Objectives:
+
+In this lab, you learn how to perform the following following tasks:
+
+  - Get access to Google Cloud.
+  - Create a Cloud Storage bucket using the Cloud Console.
+  - Create a Cloud Storage bucket using Cloud Shell.
+  - Become familair with Cloud Shell features.
+
+  #Steps:
+
+  Task 1: 
+  
+  Create a bucket using the Cloud Console.
+    
+       - Execute below command. NB! replace <BUCKET_NAME> with a globally name. 
+       
+         Remember Your bucket names must meet the following requirements:
+
+          *Bucket names must contain only lowercase letters, numbers, dashes (-), underscores (_), and dots (.). Spaces are not allowed. Names containing dots require verification.
+          *Bucket names must start and end with a number or letter.
+          *Bucket names must contain 3-63 characters. Names containing dots can contain up to 222 characters, but each dot-separated component can be no longer than 63 characters.
+          *Bucket names cannot be represented as an IP address in dotted-decimal notation (for example, 192.168.5.4).
+          *Bucket names cannot begin with the "goog" prefix.
+          *Bucket names cannot contain "google" or close misspellings, such as "g00gle". 
+
+                 gsutil mb gs://<BUCKET_NAME> 
+
+
+ Tast 2:
+
+
+ Task 3: 
+    
+    Create a second bucket and verify in the Cloud Console
+
+    - Execute below command. NB! Remeber to replace <BUCKET_NAME> with a globally name, (you can append a 2 to the globally unique bucket name you used previously)
+
+         gsutil mb gs://<BUCKET_NAME> 
+
+ Task 4:
+
+     - Explore more Cloud Shell features
+
+ Task 5: Create a persistent state in Cloud Shell.
+    
+    - Identify available regions.
+
+      1. To list available regions. execute bellow command:
+
+         gcloud compute regions list
+
+
+     2???????
+     
+    - Create and verify an environment variable.
+
+     1. Create an environment variable and replace [YOUR_REGION] with the region you selected in the previous step, To do this execute below command:
+      
+        INFRACLASS_REGION=[YOUR_REGION]
+    
+     2. Verify it with echo,to do that execute below command:
+
+        echo $INFRACLASS_REGION
+
+    You can use environment variables like this in gcloud commands to reduce the opportunities for typos, and so that you won't have to remember a lot of detailed information.
+
+
+
+    Append the environment variable to a file: 
+   
+   
+   1. Create a subdirectory for materials used in this class, to do that execute below command:
+
+        mkdir infraclass
+
+   2. Create a file called config in the infraclass directory, to do that execute below command:
+
+      touch infraclass/config
+
+   3. Append the value of your Region environment variable to the config file, to do that execute below command:
+      
+       echo INFRACLASS_REGION=$INFRACLASS_REGION >> ~/infraclass/config
+
+   4. Create a second environment variable for your Project ID, replacing [YOUR_PROJECT_ID] with your Project ID. ???????
+
+      INFRACLASS_PROJECT_ID=[YOUR_PROJECT_ID]
+
+   5. Append the value of your Project ID environment variable to the config file:
+
+      echo INFRACLASS_PROJECT_ID=$INFRACLASS_PROJECT_ID >> ~/infraclass/config
+
+    6. Use the source command to set the environment variables, and use the echo command to verify that the project variable was set:
+       
+       source infraclass/config
+       echo $INFRACLASS_PROJECT_ID
+
+    7. Close and re-open Cloud Shell. Then issue the echo command again:
+      
+       echo $INFRACLASS_PROJECT_ID
+
+  Modify the bash profile and create persistence
+
+    1. Edit the shell profile with the following command:
+       
+       nano .profile
+
+    2. Add the following line to the end of the file:
+
+       source infraclass/config
+
+    3. Press Ctrl+O, ENTER to save the file, and then press Ctrl+X to exit nano.
+    4. Close and then re-open Cloud Shell to cycle the VM.
+    5. Use the echo command to verify that the variable is still set:
+
+        echo $INFRACLASS_PROJECT_ID
+
+   
+  
